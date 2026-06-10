@@ -110,7 +110,7 @@ export function Hero() {
 
       {/* Centered headline */}
       <div className="px-6 md:px-10 mt-6 md:mt-8 text-center relative z-20 w-full">
-        <h1 className="text-display text-ink leading-[0.85] whitespace-nowrap text-[14vw] md:text-[11vw]">
+        <h1 className="text-display text-ink leading-[0.85] text-[18vw] sm:text-[15vw] md:text-[11vw]">
           <span className="inline-block overflow-hidden align-bottom">
             <span className="hero-word font-semibold inline-block">Authentic</span>
           </span>{" "}
@@ -119,8 +119,8 @@ export function Hero() {
           </span>
         </h1>
 
-        <div className="absolute right-[6%] mt-12 w-[44%] max-w-[560px] flex flex-col items-end gap-3 z-30">
-          <p className="text-right text-base w-[60%]">A quiet ritual in every cup. We source, roast and brew with obsessive intent.</p>
+        <div className="relative md:absolute md:right-[6%] mt-8 md:mt-12 w-full md:w-[44%] max-w-[560px] flex flex-col items-center md:items-end gap-3 z-30">
+          <p className="text-center md:text-right text-sm md:text-base w-full md:w-[60%]">A quiet ritual in every cup. We source, roast and brew with obsessive intent.</p>
           <a href="#catalog" className="relative w-fit px-6 py-1.5 bg-black text-primary-foreground text-sm uppercase font-mono rounded-full cursor-pointer">View Catalog</a>
 
           {/* Cup row — sits directly under the CTA */}
@@ -128,10 +128,10 @@ export function Hero() {
       </div>
 
       {/* Stage */}
-      <div className="absolute inset-x-0 bottom-0 px-6 md:px-10">
-        <div className="grid grid-cols-12 items-end gap-6">
+      <div className="relative md:absolute inset-x-0 md:bottom-0 px-6 md:px-10 mt-8 md:mt-0">
+        <div className="grid grid-cols-1 md:grid-cols-12 items-end gap-6">
           {/* Left index */}
-          <div className="col-span-3 md:col-span-2 pb-10 hero-fade">
+          <div className="hidden md:block col-span-2 pb-10 hero-fade">
             <div className="text-mono text-[11px] uppercase tracking-[0.25em] text-ink/50 mb-2">Index</div>
             <div className="text-display text-5xl md:text-7xl text-ink leading-none">
               {String(BREWS.findIndex((b) => b.id === centerId) + 1).padStart(2, "0")}
@@ -143,10 +143,10 @@ export function Hero() {
           </div>
 
           {/* Center stage */}
-          <div className="col-span-7 relative flex items-center justify-center">
-            <div className="hero-mug-wrap relative w-full max-w-[700px] aspect-5/7 ml-36">
+          <div className="col-span-1 md:col-span-7 relative flex items-center justify-center">
+            <div className="hero-mug-wrap relative w-full max-w-[280px] sm:max-w-[360px] md:max-w-[700px] aspect-[5/7] ml-0 md:ml-36">
               <div className="hero-shape ember-shape absolute inset-x-0 bottom-0 h-[80%]" />
-              <div className="hero-mug-float absolute inset-x-0 bottom-[18%] mx-auto w-[72%] max-w-[440px]">
+              <div className="hero-mug-float absolute inset-x-0 bottom-[18%] mx-auto w-[78%] md:w-[72%] max-w-[440px]">
                 <img
                   key={center.id}
                   src={center.src}
@@ -161,7 +161,7 @@ export function Hero() {
           </div>
 
           <div
-            className="w-full col-span-3"
+            className="w-full col-span-1 md:col-span-3 pb-6 md:pb-0"
             onMouseEnter={() => setCursorVisible(true)}
             onMouseLeave={() => { setCursorVisible(false); setHoverId(null); }}
             style={{ cursor: "none" }}
@@ -169,7 +169,7 @@ export function Hero() {
             <div className="relative overflow-hidden rounded-2xl">
               <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-cream to-transparent" />
               <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 z-10 bg-gradient-to-r from-cream to-transparent" />
-              <div className="flex gap-4 py-4 marquee-track">
+              <div className="flex gap-3 md:gap-4 py-4 overflow-x-auto md:overflow-visible no-scrollbar marquee-track">
                 {[...BREWS, ...BREWS].map((b, i) => {
                   const isActive = b.id === centerId;
                   return (
@@ -183,7 +183,7 @@ export function Hero() {
                       style={{ cursor: "none" }}
                       aria-label={`Select ${b.name}`}
                     >
-                      <div className="relative w-20 h-20 flex items-center justify-center">
+                      <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
                         <img
                           src={b.src}
                           alt={b.name}
@@ -204,6 +204,34 @@ export function Hero() {
         </div>
 
         
+      </div>
+
+
+      {/* Mobile info panel */}
+      <div className="md:hidden px-6 pb-8">
+        <div className="bg-ink text-cream rounded-2xl p-5">
+          <div className="text-mono text-[10px] uppercase tracking-[0.25em] text-ember mb-2">
+            {hoverId ? "Preview" : "Now Brewing"}
+          </div>
+          <div className="text-display text-xl mb-1">{display.name}</div>
+          <div className="text-mono text-[11px] uppercase tracking-[0.2em] text-cream/50 mb-3">{display.origin}</div>
+          <p className="text-sm text-cream/80 mb-4">{display.body}</p>
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <div>
+              <div className="text-mono text-[9px] uppercase tracking-[0.25em] text-cream/50">Roast</div>
+              <div>{display.roast}</div>
+            </div>
+            <div>
+              <div className="text-mono text-[9px] uppercase tracking-[0.25em] text-cream/50">From</div>
+              <div>{display.price}</div>
+            </div>
+          </div>
+          <div className="text-mono text-[10px] uppercase tracking-[0.2em] text-cream/60 mb-1">Tasting notes</div>
+          <div className="text-sm text-cream">{display.notes}</div>
+          <a href="#catalog" className="block text-center mt-4 text-mono text-[10px] uppercase tracking-[0.2em] bg-ember text-cream rounded-full px-4 py-3">
+            See in Catalog
+          </a>
+        </div>
       </div>
 
       {/* Side info panel — always visible */}

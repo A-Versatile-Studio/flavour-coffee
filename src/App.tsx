@@ -1,5 +1,5 @@
 import { Nav } from "@/components/site/Nav";
-import { Hero } from "@/components/site/Hero";
+// import { Hero } from "@/components/site/Hero";
 import { Marquee } from "@/components/site/Marquee";
 import { Catalog } from "@/components/site/Catalog";
 import { Story } from "@/components/site/Story";
@@ -10,6 +10,7 @@ import { Origins } from "@/components/site/Origins";
 import { Locations } from "@/components/site/Locations";
 import { Newsletter } from "@/components/site/Newsletter";
 import { Footer } from "@/components/site/Footer";
+import { Hero } from "./components/site/Hero-responsive";
 
 
 function App() {
